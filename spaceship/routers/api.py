@@ -3,19 +3,14 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
+@router.get("/matrix-sum")
+def matrix_sum() -> dict:
+    mat1 = np.random.randint(1, 10, size=(10, 10))
+    mat2 = np.random.randint(1, 10, size=(10, 10))
 
-
-def hello_world() -> dict:
-    return {'msg': 'Hello, World!'}
-@router.get("/matrix-multiply")
-def matrix_multiplication() -> dict:
-    mat1 = np.random.rand(10, 10)
-    mat2 = np.random.rand(10, 10)
-
-    result = np.dot(mat1, mat2)
+    result = np.add(mat1, mat2)
     return {
         "first_matrix": mat1.tolist(),
         "second_matrix": mat2.tolist(),
-        "multiplication_result": result.tolist(),
+        "sum_result": result.tolist(),
     }
-
