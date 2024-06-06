@@ -1,16 +1,27 @@
-import numpy as np
 from fastapi import APIRouter
+import numpy as np
 
 router = APIRouter()
 
-@router.get("/matrix-sum")
-def matrix_sum() -> dict:
-    mat1 = np.random.randint(1, 10, size=(10, 10))
-    mat2 = np.random.randint(1, 10, size=(10, 10))
+@router.get('/greet')
+def greeting() -> dict:
+    return {'message': 'Hello, World!'}
 
-    result = np.add(mat1, mat2)
+@router.get('/matrix_product')
+def compute_matrix_product() -> dict:
+
+    matrix_x = np.random.randint(0, 10, (10, 10)).tolist()
+    matrix_y = np.random.randint(0, 10, (10, 10)).tolist()
+
+    array_x = np.array(matrix_x)
+    array_y = np.array(matrix_y)
+
+    result_array = np.dot(array_x, array_y)
+
+    result_matrix = result_array.tolist()
+
     return {
-        "first_matrix": mat1.tolist(),
-        "second_matrix": mat2.tolist(),
-        "sum_result": result.tolist(),
+        'matrix_x': matrix_x,
+        'matrix_y': matrix_y,
+        'result': result_matrix
     }
